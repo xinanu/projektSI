@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ 'action_show_details'|trans({'%id%': Advertisement.id|default('')}) }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ 'action_show_details'|trans({'%id%': Advertisement.id|default('')}) }}</h1>
+    {% if Advertisement is defined and Advertisement|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ Advertisement.id }}</dd>
+            <dt>{{ 'label_created_at'|trans }}</dt>
+            <dd>{{ Advertisement.createdAt|format_date('long') }}</dd>
+            <dt>{{ 'label_updated_at'|trans }}</dt>
+            <dd>{{ Advertisement.updatedAt|format_date('long') }}</dd>
+            <dt>{{ 'label_category'|trans }}</dt>
+            <dd>{{  Advertisement.category.title }}</dd>
+            <dt>{{ 'label_title'|trans }}</dt>
+            <dd>{{  Advertisement.title }}</dd>
+            <dt>{{ 'label_title'|trans }}</dt>
+            <dd>{{  Advertisement.title }}</dd>
+            <p>
+
+            <button class="btn" type="submit">
+                <a href="{{ url('Advertisement_edit', {id: Advertisement.id}) }}" title="{{ 'action_edit'|trans }}">
+                    {{ 'action_edit'|trans }}
+                </a>
+            </button>
+            <button class="btn" type="submit">
+                        <a href="{{ url('Advertisement_delete', {id: Advertisement.id}) }}" title="{{ 'action_delete'|trans }}">
+                            {{ 'action_delete'|trans }}
+                        </a>
+                </button>
+            </p>
+        </dl>
+        <p>
+            <a href="{{ url('Advertisement_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        <p>
+            {{ 'message_item_not_found'|trans }}
+        </p>
+    {% endif %}
+{% endblock %}
